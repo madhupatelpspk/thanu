@@ -110,30 +110,6 @@
       background: linear-gradient(90deg, #ffcc33, #ffb347);
       transform: translateX(-50%) scale(1.05);
     }
-    /* Love letter button style */
-    .love-letter-btn {
-      position: fixed;
-      bottom: 14vw;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      padding: 1vw 3vw;
-      font-size: 2vw;
-      color: #fff;
-      background: linear-gradient(90deg, #e55d87, #5fc3e4);
-      border: none;
-      border-radius: 2vw;
-      box-shadow: 0 2px 15px #000a;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      outline: none;
-      font-family: inherit;
-      font-weight: bold;
-    }
-    .love-letter-btn:hover {
-      background: linear-gradient(90deg, #5fc3e4, #e55d87);
-      transform: translateX(-50%) scale(1.05);
-    }
     /* Made with love button */
     .love-btn-link {
       text-decoration: none;
@@ -266,11 +242,11 @@
 </head>
 <body>
   <div class="slideshow-container">
-    <img class="slide active" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/01.jpg" alt="">
-    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/02.jpg" alt="">
-    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/03.jpg" alt="">
-    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/04.jpg" alt="">
-    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/05.jpg" alt="">
+    <img class="slide active" src="https://raw.githubusercontent.com/madhupatelpspk/marriage-life/refs/heads/main/img/01.jpg" alt="Wedding Pic 1">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/marriage-life/refs/heads/main/img/02.jpg" alt="Wedding Pic 2">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/marriage-life/refs/heads/main/img/03.jpg" alt="Wedding Pic 3">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/marriage-life/refs/heads/main/img/04.jpg" alt="Wedding Pic 4">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/marriage-life/refs/heads/main/img/05.jpg" alt="Wedding Pic 5">
   </div>
   
   <!-- Birthday Countdown -->
@@ -283,27 +259,16 @@
   
   <div class="overlay">
     <div class="anniversary-text">💖 🥳 Advance Happy Birth Day Mummy 🥳 💖</div>
-    <div class="names">♥️ Thana Sri ♥️ </div>
+    <div class="names">Thana Sri; </div>
     <div class="subtitle">Wishing you a lifetime of joy and happiness ♥️😍👣</div>
   </div>
-  <!-- Love Letter button -->
-  <button class="love-letter-btn" id="loveLetterBtn">💌 Love Letter</button>
   <button class="surprise-btn" id="surpriseBtn">🎁 Surprise</button>
   <a class="love-btn-link" href="https://instagram.com/ig_madhuuuuu" target="_blank" rel="noopener">
     <button class="love-btn">
       <span class="love-heart">❤️</span>
-      your lovingly 🥰
+      Made with Love
     </button>
   </a>
-  <!-- Love Letter Modal -->
-  <div class="love-letter-modal" id="loveLetterModal">
-    <div class="love-modal-content">
-      <button class="love-close-btn" id="closeLoveModalBtn">&times;</button>
-      <span class="love-modal-heart">💖</span>
-      <div id="loveLetterText" style="font-size:2vw;color:#e55d87;min-height:5vw;"></div>
-      <span style="font-size:1.2vw; color:#e55d87;display:block;margin-top:1vw;">– 𝐌𝐚𝐝𝐡𝐮 </span>
-    </div>
-  </div>
   <div class="surprise-modal" id="surpriseModal">
     <div class="modal-content">
       <button class="close-btn" id="closeModalBtn">&times;</button>
@@ -317,7 +282,7 @@ Wishing you a fantastic day filled with joy, laughter, and all your favorite thi
   </div>
   <audio id="bgmusic" src="https://github.com/madhupatelpspk/madhuuuuu/raw/refs/heads/main/assets/mp3/song.mp3" autoplay loop></audio>
   <div class="music-credit">
-    Music: madhuuuuu
+    Music: Patel
   </div>
   <script>
     // Slideshow logic
@@ -358,8 +323,8 @@ Wishing you a fantastic day filled with joy, laughter, and all your favorite thi
         surpriseModal.style.display = 'none';
       }
     });
-    
-  // Birthday Countdown
+
+    // Birthday Countdown
     function updateCountdown() {
       const countdown = document.getElementById('countdown');
       // Target date: August 10, 2025, 00:00:00 local time
