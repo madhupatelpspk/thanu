@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>𝐌𝐚𝐝𝐡𝐮 𝐏𝐚𝐭𝐞𝐥 𝐏𝐒𝐏𝐊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .profile-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      width: 350px;
+      padding: 32px 28px 24px 28px;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .profile-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .profile-photo {
+      width: 300px;           
+      height: 300px;
+      border-radius: 50%;     
+      border: 4px solid #3498db; 
+      object-fit: cover;      
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10); 
+    }
+    .profile-name {
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #FF0000;
+      margin-bottom: 6px;
+    }
+    .profile-bio {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 18px;
+    }
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 0 22px 0;
+      padding: 0;
+    }
+    .skills-list li {
+      background: #e9ecef;
+      color: #4568dc;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 0.97em;
+      font-weight: 500;
+      margin: 0 2px;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 13px;
+    }
+    .social-links a {
+      color: #fff;
+      background: #4568dc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 1.25em;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .social-links a:hover {
+      background: #222;
+    }
+    .about-btn {
+      margin-top: 7px;
+      display: inline-block;
+      padding: 8px 20px;
+      background: #4568dc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .about-btn:hover {
+      background: #283e8e;
+    }
+
+    .quote-btn {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 8px 20px;
+      background: #e84393;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .quote-btn:hover {
+      background: #ad1457;
+    }
+    .quote-box {
+      margin: 16px 0 0 0;
+      padding: 12px;
+      background: #fce4ec;
+      border-radius: 8px;
+      color: #ad1457;
+      font-style: italic;
+      min-height: 40px;
+      font-size: 1.05em;
+      display: none;
+      transition: opacity 0.15s;
+    }
+    .quote-box.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Full Screen Mobile View */
+    @media (max-width: 600px) {
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        min-height: 100vh;
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .profile-card {
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 24px 8vw 24px 8vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .profile-photo {
+        width: 55vw;
+        height: 55vw;
+        min-width: 120px;
+        min-height: 120px;
+        max-width: 260px;
+        max-height: 260px;
+      }
+      .skills-list {
+        gap: 6px;
+      }
+      .social-links {
+        gap: 12px;
+      }
+      .about-btn, .quote-btn {
+        width: 90vw;
+        margin: 8px 0 0 0;
+        font-size: 1.1em;
+      }
+      .profile-name {
+        font-size: 1.2em;
+      }
+      .profile-bio {
+        font-size: 0.98em;
+      }
+      .quote-box {
+        width: 90vw;
+        font-size: 1.08em;
+      }
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <div class="profile-card">
+    <img src="https://raw.githubusercontent.com/madhupatelpspk/aboutme/refs/heads/main/profile/IMG_2024_09_15_102134.jpg" alt="Profile Photo" class="profile-photo">
+    <div class="profile-name">Madhu Patel PSPK</div>
+    <div class="profile-bio">
+      Techieee<br>
+      Always learning new things!
+    </div>
+    <ul class="skills-list">
+      <li>JaiShreeRam</li>
+      <li>PawanKalyan</li>
+      <li>Techieee</li>
+      <li>YouTuber</li>
+      <li>⚠️</li>
+      <li>PUBG</li>
+      <li>Online Games</li>
+      <li>♥️</li>
+    </ul>
+    <div class="social-links">
+      <a href="https://github.com/madhupatelpspk" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://t.me/ig_madhuuuuu" target="_blank" title="Telegram"><i class="fab fa-twitter"></i></a>
+      <a href="https://instagram.com/ig_madhuuuuu" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:madhupatelpudari@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+    <div>
+      <a href="https://madhupatel.netlify.app" class="about-btn" target="_blank">About Me</a>
+      <a href="https://youtube.com/@youtuberzx" class="about-btn" target="_blank">SUBSCRIBE</a>
+    </div>
+    <button class="quote-btn" onclick="showQuote()">Get a Love Quote</button>
+    <div class="quote-box" id="quoteBox"></div>
+  </div>
+  <script>
+    const loveQuotes = [
+      "Love is composed of a single soul inhabiting two bodies. – Aristotle",
+      "You are my today and all of my tomorrows. – Leo Christopher",
+      "In all the world, there is no heart for me like yours. – Maya Angelou",
+      "I saw that you were perfect, and so I loved you. – Angelita Lim",
+      "To love and be loved is to feel the sun from both sides. – David Viscott",
+      "I love you not only for what you are, but for what I am when I am with you. – Roy Croft",
+      "If I know what love is, it is because of you. – Hermann Hesse",
+      "Every time I see you, I fall in love all over again.",
+      "You are the source of my joy, the center of my world and the whole of my heart.",
+      "I would rather spend one lifetime with you than face all the ages of this world alone. – J.R.R. Tolkien"
+    ];
+
+    function showQuote() {
+      const quoteBox = document.getElementById('quoteBox');
+      const randomIndex = Math.floor(Math.random() * loveQuotes.length);
+      quoteBox.textContent = loveQuotes[randomIndex];
+      quoteBox.classList.add('visible');
+    }
+  </script>
+</body>
+</html>
