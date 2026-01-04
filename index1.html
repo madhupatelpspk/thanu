@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy bday madhu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 80%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    
+  .slideshow-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0; left: 0;
+    z-index: 1;
+    background: #000; /* Ensures background fill on mobile */
+  }
+  .slide {
+    opacity: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;  /* <-- key for mobile-friendly fit */
+    background: #000;
+    transition: opacity 2s;
+    left: 0;
+    top: 0;
+  }
+  .slide.active {
+    opacity: 1;
+    z-index: 2;
+  }
+    .overlay {
+      position: fixed;
+      z-index: 3;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      text-shadow: 0 4px 24px #000, 0 2px 4px #000;
+    }
+    .anniversary-text {
+      font-size: 3vw;
+      margin-bottom: 2vw;
+      letter-spacing: 2px;
+      font-weight: bold;
+      color: #ffe066;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff8c00; }
+      to { text-shadow: 0 0 40px #fffacd, 0 0 60px #ff8c00; }
+    }
+    .names {
+      font-size: 4vw;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 1vw;
+    }
+    .subtitle {
+      font-size: 2vw;
+      color: #e0e0e0;
+      margin-bottom: 3vw;
+    }
+    .music-credit {
+      position: absolute;
+      bottom: 2vw;
+      right: 2vw;
+      font-size: 1vw;
+      color: #fff9;
+      text-align: right;
+      z-index: 4;
+      text-shadow: 0 1px 8px #000;
+    }
+    /* Surprise button style */
+    .surprise-btn {
+      position: fixed;
+      bottom: 8vw;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      padding: 1vw 3vw;
+      font-size: 2vw;
+      color: #fff;
+      background: linear-gradient(90deg, #ffb347, #ffcc33);
+      border: none;
+      border-radius: 2vw;
+      box-shadow: 0 2px 15px #000a;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      outline: none;
+      pointer-events: auto;
+    }
+    .surprise-btn:hover {
+      background: linear-gradient(90deg, #ffcc33, #ffb347);
+      transform: translateX(-50%) scale(1.05);
+    }
+    /* Love letter button style */
+    .love-letter-btn {
+      position: fixed;
+      bottom: 14vw;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      padding: 1vw 3vw;
+      font-size: 2vw;
+      color: #fff;
+      background: linear-gradient(90deg, #e55d87, #5fc3e4);
+      border: none;
+      border-radius: 2vw;
+      box-shadow: 0 2px 15px #000a;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      outline: none;
+      font-family: inherit;
+      font-weight: bold;
+      pointer-events: auto;
+    }
+    .love-letter-btn:hover {
+      background: linear-gradient(90deg, #5fc3e4, #e55d87);
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    /* Venue + Wishes container (added) */
+    .venue-wishes {
+      position: fixed;
+      bottom: 20vw; /* sits above the surprise button */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: rgba(255,255,255,0.04);
+      padding: 1.2vw 1.6vw;
+      border-radius: 1.2vw;
+      display: flex;
+      gap: 1vw;
+      align-items: center;
+      pointer-events: auto;
+      box-shadow: 0 6px 24px #0008;
+      backdrop-filter: blur(6px);
+    }
+    .map-btn {
+      padding: 0.8vw 1.2vw;
+      font-size: 1.6vw;
+      color: #fff;
+      background: linear-gradient(90deg,#4caf50,#66bb6a);
+      border: none;
+      border-radius: 1vw;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      gap: 0.6vw;
+      align-items: center;
+      box-shadow: 0 2px 12px #0008;
+    }
+    .map-btn:hover {
+      transform: scale(1.03);
+    }
+    .wishes-box {
+      display: flex;
+      gap: 0.6vw;
+      align-items: center;
+    }
+    .wishes-input {
+      width: 34vw;
+      min-width: 18vw;
+      max-width: 48vw;
+      padding: 0.8vw 1vw;
+      font-size: 1.4vw;
+      border-radius: 0.8vw;
+      border: none;
+      outline: none;
+      box-shadow: inset 0 1px 0 #0003;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+    .wishes-submit {
+      padding: 0.8vw 1.2vw;
+      font-size: 1.4vw;
+      color: #fff;
+      background: linear-gradient(90deg,#e55d87,#5fc3e4);
+      border: none;
+      border-radius: 0.8vw;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #0008;
+    }
+    .wishes-submit:hover {
+      transform: scale(1.03);
+    }
+
+    /* Small wishes list panel */
+    .wishes-list {
+      position: fixed;
+      right: 2vw;
+      bottom: 2vw;
+      z-index: 12;
+      max-height: 40vh;
+      width: 28vw;
+      min-width: 18vw;
+      overflow: auto;
+      padding: 1vw;
+      border-radius: 1vw;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 6px 30px #000a;
+      pointer-events: auto;
+      font-size: 1.2vw;
+    }
+    .wishes-list h4 {
+      margin: 0 0 0.6vw 0;
+      font-size: 1.2vw;
+      color: #ffe066;
+    }
+    .wish-item {
+      padding: 0.6vw;
+      margin-bottom: 0.6vw;
+      border-radius: 0.6vw;
+      background: rgba(255,255,255,0.02);
+      color: #fff;
+      font-size: 1.1vw;
+      box-shadow: inset 0 -1px 0 #0003;
+      word-break: break-word;
+    }
+    .wish-item small {
+      display: block;
+      color: #ccc;
+      font-size: 0.9vw;
+      margin-top: 0.4vw;
+    }
+
+    /* Love letter modal */
+    .love-letter-modal {
+      display: none;
+      position: fixed;
+      z-index: 21;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      animation: fadein 0.4s;
+    }
+    .love-modal-content {
+      background: #fffbe6;
+      color: #333;
+      border-radius: 1.5vw;
+      padding: 3vw 4vw;
+      max-width: 80vw;
+      text-align: center;
+      box-shadow: 0 4px 32px #000c;
+      font-size: 2.5vw;
+      position: relative;
+    }
+    .love-close-btn {
+      position: absolute;
+      top: 1vw;
+      right: 2vw;
+      background: none;
+      border: none;
+      font-size: 2vw;
+      color: #e55d87;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .love-modal-heart {
+      font-size: 4vw;
+      color: #e55d87;
+      margin-bottom: 1vw;
+      display: block;
+    }
+    /* Made with love button */
+    .love-btn-link {
+      text-decoration: none;
+      position: fixed;
+      bottom: 2vw;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+    }
+    .love-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.7vw;
+      padding: 0.7vw 2vw;
+      font-size: 1.4vw;
+      color: #fff;
+      background: linear-gradient(90deg, #e55d87, #5fc3e4);
+      border: none;
+      border-radius: 2vw;
+      box-shadow: 0 2px 10px #0007;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      outline: none;
+      font-family: inherit;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .love-btn:hover {
+      background: linear-gradient(90deg, #5fc3e4, #e55d87);
+      transform: scale(1.06);
+    }
+    .love-heart {
+      font-size: 1.7vw;
+      color: #ff5eae;
+      margin-right: 0.2vw;
+    }
+    /* Surprise modal */
+    .surprise-modal {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      animation: fadein 0.4s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: #fffbe6;
+      color: #333;
+      border-radius: 1.5vw;
+      padding: 3vw 4vw;
+      max-width: 80vw;
+      text-align: center;
+      box-shadow: 0 4px 32px #000c;
+      font-size: 2.5vw;
+      position: relative;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1vw;
+      right: 2vw;
+      background: none;
+      border: none;
+      font-size: 2vw;
+      color: #b8860b;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-heart {
+      font-size: 4vw;
+      color: #ff69b4;
+      margin-bottom: 1vw;
+      display: block;
+    }
+    /* Countdown styles */
+    .countdown-container {
+      position: fixed;
+      top: 2vw;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      padding: 1vw 2vw;
+      border-radius: 2vw;
+      z-index: 20;
+      box-shadow: 0 2px 12px #0009;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: auto;
+    }
+    .countdown-title {
+      font-size: 2vw;
+      font-weight: bold;
+      color: #ffe066;
+      margin-bottom: 0.7vw;
+      letter-spacing: 1px;
+      text-align: center;
+      text-shadow: 0 2px 12px #000a;
+    }
+    .countdown {
+      display: flex;
+      gap: 1vw;
+      font-size: 2vw;
+      font-weight: bold;
+      color: #fff;
+      justify-content: center;
+      text-shadow: 0 2px 8px #222a;
+    }
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 3vw;
+    }
+    .countdown-label {
+      font-size: 1vw;
+      color: #ffe066;
+      margin-top: 0.15vw;
+      text-shadow: none;
+      font-weight: 500;
+    }
+    /* responsive tweaks */
+    @media (max-width: 600px) {
+      .wishes-input { width: 48vw; font-size: 3.8vw; }
+      .venue-wishes { flex-direction: column; gap: 0.6vw; bottom: 24vw; padding: 1.4vw; }
+      .map-btn, .wishes-submit { font-size: 3.8vw; padding: 1.4vw 2vw; border-radius: 2.8vw; }
+      .wishes-list { width: 76vw; right: 2vw; left: 2vw; bottom: 2vw; max-height: 36vh; }
+      .surprise-btn, .love-letter-btn { font-size: 4.6vw; padding: 2.4vw 4vw; border-radius: 3.6vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/01.jpg" alt="Pic 1">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/02.jpg" alt="Pic 2">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/03.jpg" alt="Pic 3">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/04.jpg" alt="Pic 4">
+    <img class="slide" src="https://raw.githubusercontent.com/madhupatelpspk/thanuuuu/refs/heads/main/img/05.jpg" alt="Pic 1">
+  </div>
+  
+  <!-- Birthday Countdown -->
+  <div class="countdown-container" id="countdownContainer">
+    <div class="countdown-title">🎈 Advance Happy Birthday 🎈</div>
+    <div class="countdown" id="countdown">
+      <!-- Timer will be inserted here -->
+    </div>
+  </div>
+  
+  <div class="overlay">
+    <div class="anniversary-text">💖 🥳 Advance Happy Birth Day 🥳 💖</div>
+    <div class="names">♥️ Madhuuuuu ♥️ </div>
+    <div class="subtitle">Wishing you a lifetime of joy and happiness ♥️😍👣</div>
+  </div>
+  <!-- Love Letter button -->
+  <button class="love-letter-btn" id="loveLetterBtn">💌 Love Letter</button>
+  <button class="surprise-btn" id="surpriseBtn">🎁 Surprise</button>
+
+  <!-- Venue link + Wishes box (added after surprise button) -->
+  <div class="venue-wishes" aria-live="polite">
+    <!-- Google Maps link. Replace the href with your venue's actual maps link or place_id -->
+    <a class="map-btn" id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Birthday+Venue+Madhu" target="_blank" rel="noopener" aria-label="Open venue in Google Maps">
+      📍 Venue &nbsp;<span style="font-size:1.1vw;opacity:0.9">Open Map</span>
+    </a>
+
+    <div class="wishes-box" role="form" aria-label="Send wishes form">
+      <input id="wishInput" class="wishes-input" type="text" placeholder="Write your wishes..." aria-label="Write your wishes">
+      <button id="wishSubmit" class="wishes-submit" aria-label="Send wish">Send</button>
+    </div>
+  </div>
+
+  <a class="love-btn-link" href="https://instagram.com/shiragnya" target="_blank" rel="noopener">
+    <button class="love-btn">
+      <span class="love-heart">❤️</span>
+      your lovingly 🥰
+    </button>
+  </a>
+
+  <!-- Wishes list panel (shows submitted wishes) -->
+  <div class="wishes-list" id="wishesListPanel" aria-live="polite" role="list" style="display:none;">
+    <h4>Wishes</h4>
+    <div id="wishesList"></div>
+  </div>
+
+  <!-- Love Letter Modal -->
+  <div class="love-letter-modal" id="loveLetterModal">
+    <div class="love-modal-content">
+      <button class="love-close-btn" id="closeLoveModalBtn">&times;</button>
+      <span class="love-modal-heart">💖</span>
+      <div id="loveLetterText" style="font-size:2vw;color:#e55d87;min-height:5vw;"></div>
+      <span style="font-size:1.2vw; color:#e55d87;display:block;margin-top:1vw;">– 𝐌𝐚𝐝𝐡𝐮 </span>
+    </div>
+  </div>
+  <div class="surprise-modal" id="surpriseModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModalBtn">&times;</button>
+      <span class="modal-heart">💞</span>
+      <div>
+        "Advance Happy Birthday MADHU! 🎉🥳  
+Wishing you a fantastic day filled with joy, laughter, May this Birthday bring you happiness, good health, and new life goal... Enjoy your special day ♥️😍!."<br>
+        <span style="font-size:1.2vw; color:#b8860b;display:block;margin-top:1vw;">– Your LOVE 😍 </span>
+      </div>
+    </div>
+  </div>
+  <audio id="bgmusic" src="https://github.com/madhupatelpspk/thanu/blob/main/assets/mp3/AUD-20250714-WA0000.mp3" autoplay loop></audio>
+  <div class="music-credit">
+    Music: madhuuuuu
+  </div>
+  <script>
+    // Slideshow logic
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    const FADE_DURATION = 2000; // ms
+    const SHOW_DURATION = 3500; // ms
+    function showNextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+    // Make first slide visible
+    if (slides.length) slides[0].classList.add('active');
+    setInterval(showNextSlide, SHOW_DURATION + FADE_DURATION);
+
+    // Optional: Unmute music on user click (for browser autoplay policies)
+    window.addEventListener('click', function enableMusic() {
+      const music = document.getElementById('bgmusic');
+      if (music && music.paused) music.play().catch(() => {});
+      window.removeEventListener('click', enableMusic);
+    });
+
+    // Surprise modal logic
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const surpriseModal = document.getElementById('surpriseModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    surpriseBtn.addEventListener('click', function() {
+      surpriseModal.style.display = 'flex';
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+      surpriseModal.style.display = 'none';
+    });
+
+    // Optional: Close modal when clicking outside
+    surpriseModal.addEventListener('click', function(e) {
+      if (e.target === surpriseModal) {
+        surpriseModal.style.display = 'none';
+      }
+    });
+
+    // Love Letter modal logic
+    const loveLetterBtn = document.getElementById('loveLetterBtn');
+    const loveLetterModal = document.getElementById('loveLetterModal');
+    const closeLoveModalBtn = document.getElementById('closeLoveModalBtn');
+    const loveLetterText = document.getElementById('loveLetterText');
+    const loveQuote = 'Thank you for every hug, every smile, and every moment of care,I love you more than words can say... love you mummy 🥰😍';
+
+    function typeText(text, element, speed = 50) {
+      element.innerHTML = '';
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      type();
+    }
+
+    loveLetterBtn.addEventListener('click', function() {
+      loveLetterModal.style.display = 'flex';
+      typeText(loveQuote, loveLetterText, 50);
+    });
+
+    closeLoveModalBtn.addEventListener('click', function() {
+      loveLetterModal.style.display = 'none';
+    });
+
+    loveLetterModal.addEventListener('click', function(e) {
+      if (e.target === loveLetterModal) {
+        loveLetterModal.style.display = 'none';
+      }
+    });
+
+    // Birthday Countdown
+    function updateCountdown() {
+      const countdown = document.getElementById('countdown');
+      // Target date: August 10, 2025, 00:00:00 local time
+      const target = new Date(2025, 7, 10, 0, 0, 0); // month is 0-indexed (7 = August)
+      const now = new Date();
+      let diff = target - now;
+      if (diff <= 0) {
+        countdown.innerHTML = "<span style='font-size:2vw;color:#ffe066;'>🎉 It's Party Time! 🎉</span>";
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * (1000 * 60 * 60 * 24);
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff -= hours * (1000 * 60 * 60);
+      const minutes = Math.floor(diff / (1000 * 60));
+      diff -= minutes * (1000 * 60);
+      const seconds = Math.floor(diff / 1000);
+      countdown.innerHTML = `
+        <div class="countdown-item">
+          <div>${days}</div>
+          <div class="countdown-label">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div>${hours.toString().padStart(2,'0')}</div>
+          <div class="countdown-label">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div>${minutes.toString().padStart(2,'0')}</div>
+          <div class="countdown-label">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div>${seconds.toString().padStart(2,'0')}</div>
+          <div class="countdown-label">Seconds</div>
+        </div>
+      `;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Venue link - nothing special to do, it's a simple link that opens Google Maps.
+    // You can replace the href in the markup with the actual Google Maps place link.
+
+    // Wishes box logic (client-side only, persisted to localStorage)
+    const wishInput = document.getElementById('wishInput');
+    const wishSubmit = document.getElementById('wishSubmit');
+    const wishesList = document.getElementById('wishesList');
+    const wishesPanel = document.getElementById('wishesListPanel');
+    const STORAGE_KEY = 'madhu_wishes_v1';
+
+    function loadWishes() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      let arr = [];
+      try { arr = raw ? JSON.parse(raw) : []; } catch(e) { arr = []; }
+      return Array.isArray(arr) ? arr : [];
+    }
+
+    function saveWishes(arr) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
+
+    function renderWishes() {
+      const arr = loadWishes();
+      wishesList.innerHTML = '';
+      if (!arr.length) {
+        wishesPanel.style.display = 'none';
+        return;
+      }
+      wishesPanel.style.display = 'block';
+      // show newest at top
+      arr.slice().reverse().forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'wish-item';
+        el.setAttribute('role','listitem');
+        const textNode = document.createElement('div');
+        textNode.textContent = item.text;
+        el.appendChild(textNode);
+        const meta = document.createElement('small');
+        meta.textContent = item.when;
+        el.appendChild(meta);
+        wishesList.appendChild(el);
+      });
+    }
+
+    function addWish(text) {
+      if (!text || !text.trim()) return false;
+      const arr = loadWishes();
+      cons
