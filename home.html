@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome — Madhu Potti</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="splash">
+    <div class="card" role="main" aria-labelledby="site-title">
+      <h1 id="site-title">Madhu Potti</h1>
+      <p class="subtitle">Thought vs Reality</p>
+      <p class="intro">Nenu Naa Book — Express cheyaleni emotions ♥️</p>
+
+      <div class="actions">
+        <button id="enter" class="enter-btn" aria-label="Enter site">Enter</button>
+        <p class="note">Or press Enter · Redirecting in <span id="count">6</span>s</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigate to the existing index.html
+    const TARGET = 'index.html';
+
+    const enterBtn = document.getElementById('enter');
+    enterBtn.addEventListener('click', () => { window.location.href = TARGET; });
+
+    // Countdown auto-redirect
+    let seconds = 6;
+    const counter = document.getElementById('count');
+    const interval = setInterval(() => {
+      seconds -= 1;
+      counter.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        window.location.href = TARGET;
+      }
+    }, 1000);
+
+    // Allow keyboard Enter to proceed
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') enterBtn.click();
+    });
+
+    // Improve perceived performance on slow connections:
+    // prefetch the target page in the background
+    const link = document.createElement('link');
+    link.rel = 'prefetch';
+    link.href = TARGET;
+    document.head.appendChild(link);
+  </script>
+</body>
+</html>
